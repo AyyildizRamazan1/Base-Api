@@ -4,7 +4,17 @@ const APIError = require("../utils/errors");
 const Response = require("../utils/response");
 
 const login = async (req, res) => {
-  console.log(req.body);
+  const { email, password } = req.body;
+  const userInfo = await user.findOne({ email });
+
+  console.log(userInfo);
+
+  if (!userInfo) throw new APIError("Email yada Şifre Hatalıdır !", 401);
+
+  const comparePassword = await bcrypt.compare(password, userInfo.password);
+  console.log(comparePassword);
+
+  if (!comparePassword) throw new APIError("Email yada Şifre Hatalıdır !", 401);
 
   return res.json(req.body);
 };
