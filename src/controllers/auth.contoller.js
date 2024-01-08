@@ -4,6 +4,7 @@ const APIError = require("../utils/errors");
 const Response = require("../utils/response");
 const { createToken } = require("../middlewares/validations/auth");
 
+
 const login = async (req, res) => {
   const { email, password } = req.body;
   const userInfo = await user.findOne({ email });
@@ -41,7 +42,12 @@ const register = async (req, res) => {
       throw new APIError("Kullanıcı Kayıt Edilemedi!", 400);
     });
 };
+
+const me = async (req, res) => {
+  return new Response(req.user).success(res);
+};
 module.exports = {
   login,
   register,
+  me,
 };

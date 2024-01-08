@@ -7,13 +7,10 @@ const errorHandlerMiddleware = (err, req, res, next) => {
       message: err.message,
     });
   }
-  return (
-    res.status(500),
-    json({
-      success: false,
-      message: "Bir hata le karşılaştık lütfen apinizi control ediniz",
-    })
-  );
+  return res.status(500).json({
+    success: false,
+    message: "Bir hata le karşılaştık lütfen apinizi control ediniz",
+  });
 };
 
 module.exports = errorHandlerMiddleware;
