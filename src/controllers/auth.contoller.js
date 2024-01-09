@@ -6,10 +6,11 @@ const { createToken } = require("../middlewares/validations/auth");
 
 
 const login = async (req, res) => {
+  console.log(login);
   const { email, password } = req.body;
   const userInfo = await user.findOne({ email });
 
-  console.log(userInfo);
+  
 
   if (!userInfo) throw new APIError("Email yada Şifre Hatalıdır !", 401);
 
